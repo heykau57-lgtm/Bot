@@ -1,70 +1,224 @@
 <!DOCTYPE html>
-<html>
+<html lang="ms">
 <head>
-    <title>Waie Bot</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Waie - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-dark: #080310;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1a0b2e 0%, #080310 80%);
+            --card-bg: rgba(26, 11, 46, 0.85);
+            --accent-pink: #db2777;
+            --accent-purple: #9333ea;
+            --accent-cyan: #06b6d4;
+            --text-gray: #9ca3af;
+            --font-title: 'Share Tech Mono', monospace;
+            --font-code: 'Share Tech Mono', monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #1a0b2e, #080310);
-            color: white;
-            font-family: monospace;
+            background-color: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            color: #ffffff;
+            font-family: var(--font-code);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
         }
-        .card {
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 20px;
+        .login-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(219, 39, 119, 0.3);
+            border-radius: 28px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .logo {
+            font-family: var(--font-title);
+            font-size: 32px;
+            font-weight: 700;
             text-align: center;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(219, 39, 119, 0.6);
+            margin-bottom: 8px;
         }
-        h1 { color: #db2777; }
-        input, button {
-            padding: 10px;
-            margin: 10px;
-            border-radius: 8px;
-            border: none;
+        .sub {
+            text-align: center;
+            font-size: 11px;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            color: var(--accent-pink);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            color: white;
+            font-family: var(--font-code);
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 15px rgba(219, 39, 119, 0.2);
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        .checkbox .box {
+            width: 18px;
+            height: 18px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .checkbox .box.active {
+            background: var(--accent-pink);
+            border-color: var(--accent-pink);
+        }
+        .checkbox .box.active::after {
+            content: '✓';
+            font-size: 11px;
+            color: white;
+        }
+        .checkbox span {
+            font-size: 12px;
+            color: var(--text-gray);
         }
         button {
-            background: #db2777;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            border: none;
+            border-radius: 14px;
             color: white;
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
             cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(219, 39, 119, 0.3);
+        }
+        button:active { transform: scale(0.97); }
+        .error {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 10px;
+            color: var(--text-gray);
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🔐 Waie Bot</h1>
-        <p>Login System</p>
-        <input type="text" id="user" placeholder="Username">
-        <input type="password" id="pass" placeholder="Key">
-        <button onclick="login()">Login</button>
-        <p id="msg"></p>
+    <div class="login-card">
+        <div class="logo">🔐 WAIE</div>
+        <div class="sub">SECURE GATEWAY</div>
+        
+        <div class="input-group">
+            <label>USERNAME / ID</label>
+            <input type="text" id="username" placeholder="username" autocomplete="off">
+        </div>
+        
+        <div class="input-group">
+            <label>SECURITY KEY</label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div>
+        
+        <div class="checkbox" onclick="toggleAuto()">
+            <div class="box" id="autoBox"></div>
+            <span>🔁 INGAT SAYA (30 HARI)</span>
+        </div>
+        
+        <button onclick="doLogin()">⚡ INITIALIZE ACCESS</button>
+        
+        <div class="error" id="errorMsg"></div>
+        <div class="footer">WAiE · WhatsApp Security Tools</div>
     </div>
+    
     <script>
-        async function login() {
-            const username = document.getElementById('user').value;
-            const key = document.getElementById('pass').value;
-            const msg = document.getElementById('msg');
+        let isAuto = false;
+        
+        function toggleAuto() {
+            isAuto = !isAuto;
+            const box = document.getElementById('autoBox');
+            if (isAuto) box.classList.add('active');
+            else box.classList.remove('active');
+        }
+        
+        async function doLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorDiv = document.getElementById('errorMsg');
+            
+            if (!username || !password) {
+                errorDiv.innerText = '❌ Sila isi semua maklumat';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            errorDiv.style.display = 'none';
             
             const formData = new URLSearchParams();
             formData.append('username', username);
-            formData.append('key', key);
+            formData.append('key', password);
+            formData.append('remember', isAuto.toString());
             
-            const res = await fetch('/auth', {
-                method: 'POST',
-                body: formData
-            });
-            
-            if (res.redirected) {
-                window.location.href = res.url;
-            } else {
-                msg.innerText = 'Login gagal';
+            try {
+                const res = await fetch('/auth', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (res.redirected) {
+                    window.location.href = res.url;
+                } else {
+                    errorDiv.innerText = '❌ Login gagal. Periksa username dan key.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.innerText = '❌ Rangkaian error. Cuba lagi.';
+                errorDiv.style.display = 'block';
             }
         }
+        
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') doLogin();
+        });
     </script>
 </body>
 </html>
