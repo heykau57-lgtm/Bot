@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waie Bot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a0b2e, #080310);
+            color: white;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        h1 { color: #db2777; }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            background: #db2777;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔐 Waie Bot</h1>
+        <p>Login System</p>
+        <input type="text" id="user" placeholder="Username">
+        <input type="password" id="pass" placeholder="Key">
+        <button onclick="login()">Login</button>
+        <p id="msg"></p>
+    </div>
+    <script>
+        async function login() {
+            const username = document.getElementById('user').value;
+            const key = document.getElementById('pass').value;
+            const msg = document.getElementById('msg');
+            
+            const formData = new URLSearchParams();
+            formData.append('username', username);
+            formData.append('key', key);
+            
+            const res = await fetch('/auth', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (res.redirected) {
+                window.location.href = res.url;
+            } else {
+                msg.innerText = 'Login gagal';
+            }
+        }
+    </script>
+</body>
+</html>
