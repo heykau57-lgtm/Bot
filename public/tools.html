@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Waie - Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#080310;--bg2:radial-gradient(circle at 50% 0%,#1a0b2e 0%,#080310 80%);--card:rgba(26,11,46,0.85);--pink:#db2777;--purple:#9333ea;--cyan:#06b6d4;--gray:#9ca3af;--font:'Share Tech Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);background-image:var(--bg2);font-family:var(--font);min-height:100vh;padding:20px}
+.container{max-width:600px;margin:0 auto}
+header{background:rgba(8,3,16,0.95);padding:15px 20px;border-radius:20px;margin-bottom:20px;display:flex;align-items:center;gap:15px}
+.back-btn{background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.3);color:var(--pink);padding:8px 15px;border-radius:10px;text-decoration:none;font-size:12px}
+.brand{font-size:18px;font-weight:700;color:#fff;text-shadow:0 0 10px var(--pink);flex:1;text-align:center}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.tool-card{background:var(--card);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:0.2s}
+.tool-card:active{transform:scale(0.96)}
+.tool-icon{width:50px;height:50px;background:linear-gradient(135deg,var(--pink),var(--purple));border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.tool-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px}
+.tool-desc{font-size:9px;color:var(--gray)}
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <a href="/dashboard" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+        <div class="brand">🛠️ TOOLS</div>
+    </header>
+    <div class="tools-grid">
+        <div class="tool-card" onclick="window.open('/youtube-downloader','_blank')"><div class="tool-icon"><i class="fab fa-youtube" style="font-size:24px"></i></div><div class="tool-name">YouTube Downloader</div><div class="tool-desc">Download video/audio</div></div>
+        <div class="tool-card" onclick="window.open('/tiktok-downloader','_blank')"><div class="tool-icon"><i class="fab fa-tiktok" style="font-size:24px"></i></div><div class="tool-name">TikTok Downloader</div><div class="tool-desc">No watermark</div></div>
+        <div class="tool-card" onclick="window.open('/pinterest-downloader','_blank')"><div class="tool-icon"><i class="fab fa-pinterest" style="font-size:24px"></i></div><div class="tool-name">Pinterest Downloader</div><div class="tool-desc">Download images</div></div>
+        <div class="tool-card" onclick="window.open('/speed-test','_blank')"><div class="tool-icon"><i class="fas fa-tachometer-alt" style="font-size:24px"></i></div><div class="tool-name">Speed Test</div><div class="tool-desc">Check connection</div></div>
+    </div>
+</div>
+</body>
+</html>
