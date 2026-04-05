@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Waie - Execution</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#080310;--card:rgba(26,11,46,0.85);--pink:#db2777;--purple:#9333ea;--gray:#9ca3af;--font:'Share Tech Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);background:radial-gradient(circle at 50% 0%,#1a0b2e 0%,#080310 80%);font-family:var(--font);color:#fff}
+header{display:flex;align-items:center;gap:15px;padding:20px;background:rgba(8,3,16,0.95);border-bottom:1px solid rgba(255,255,255,0.05)}
+.back-btn{background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.3);color:var(--pink);padding:8px 15px;border-radius:12px;text-decoration:none;font-size:12px}
+.brand{font-size:20px;font-weight:700;text-shadow:0 0 10px var(--pink)}
+main{padding:20px;max-width:500px;margin:0 auto}
+.card{background:var(--card);border:1px solid rgba(219,39,119,0.2);border-radius:20px;padding:25px;margin-bottom:20px}
+.input-group{margin-bottom:15px}
+.input-group label{color:var(--pink);font-size:11px;display:block;margin-bottom:5px}
+.input-group input,select{width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);padding:14px;border-radius:12px;color:#fff;font-family:var(--font)}
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--pink),var(--purple));border:none;border-radius:12px;color:#fff;font-family:var(--font);font-weight:700;cursor:pointer;margin-top:10px}
+.result{background:rgba(0,0,0,0.3);border-radius:12px;padding:15px;margin-top:15px;display:none}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(26,11,46,0.95);border:1px solid var(--pink);padding:10px 20px;border-radius:10px;display:none}
+</style>
+</head>
+<body>
+<header>
+<a href="/dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+<div class="brand">Waie Execution</div>
+</header>
+<main>
+<div class="card">
+<div class="input-group"><label>Target Number</label><input type="tel" id="target" placeholder="60123456789"></div>
+<div class="input-group"><label>Bug Mode</label>
+<select id="mode"><option value="spam">Spam Pairing Code</option><option value="crash">Crash WhatsApp</option><option value="flood">Flood Message</option></select></div>
+<button class="btn" onclick="execute()"><i class="fas fa-bolt"></i> Execute</button>
+<div class="result" id="result"></div>
+</div>
+</main>
+<div class="toast" id="toast">Processing...</div>
+<script>
+function showToast(msg){const t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
+async function execute(){
+const target=document.getElementById('target').value;
+const mode=document.getElementById('mode').value;
+if(!target){showToast('Masukkan nombor target');return;}
+showToast('Executing...');
+const res=await fetch('/api/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({target,mode})});
+const data=await res.json();
+document.getElementById('result').innerHTML=`<div style="color:${data.success?'#10b981':'#ef4444'}">${data.message}</div>`;
+document.getElementById('result').style.display='block';
+showToast(data.message);
+}
+</script>
+</body>
+</html>
