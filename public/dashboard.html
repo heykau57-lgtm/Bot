@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Waie - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #080310;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1a0b2e 0%, #080310 80%);
+            --card-bg: rgba(26, 11, 46, 0.85);
+            --accent-pink: #db2777;
+            --accent-purple: #9333ea;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --text-gray: #9ca3af;
+            --font-title: 'Share Tech Mono', monospace;
+            --font-code: 'Share Tech Mono', monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            color: #ffffff;
+            font-family: var(--font-code);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            padding-top: 40px;
+            background: rgba(8,3,16,0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .logo {
+            font-family: var(--font-title);
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(219,39,119,0.6);
+        }
+        .menu-btn {
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            padding-bottom: 100px;
+        }
+        .hero-card {
+            background: linear-gradient(135deg, rgba(219,39,119,0.15), rgba(147,51,234,0.15));
+            border: 1px solid rgba(219,39,119,0.3);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .welcome {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 5px;
+        }
+        .username {
+            font-family: var(--font-title);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-box {
+            flex: 1;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-value {
+            font-family: var(--font-title);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-pink);
+        }
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-gray);
+            margin-top: 5px;
+        }
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 16px;
+            font-weight: 700;
+            border-left: 3px solid var(--accent-pink);
+            padding-left: 12px;
+            margin: 25px 0 15px 0;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .menu-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .menu-card:active {
+            transform: scale(0.97);
+            border-color: var(--accent-pink);
+        }
+        .menu-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .menu-title {
+            font-family: var(--font-title);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .menu-desc {
+            font-size: 10px;
+            color: var(--text-gray);
+            margin-top: 5px;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(8,3,16,0.98);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 25px 0;
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+        .nav-item.active { color: var(--accent-pink); }
+        .nav-text { font-size: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🔐 WAIE</div>
+    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+</header>
+
+<main>
+    <div class="hero-card">
+        <div class="welcome">WELCOME BACK,</div>
+        <div class="username" id="username">Loading...</div>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-value" id="onlineUsers">0</div>
+                <div class="stat-label">ONLINE</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="sendersCount">0</div>
+                <div class="stat-label">SENDERS</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="daysLeft">0</div>
+                <div class="stat-label">DAYS LEFT</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">⚡ QUICK ACCESS</div>
+    <div class="menu-grid">
+        <div class="menu-card" onclick="location.href='/execution'">
+            <div class="menu-icon"><i class="fas fa-bolt"></i></div>
+            <div class="menu-title">EXECUTION</div>
+            <div class="menu-desc">WhatsApp Bug Attack</div>
+        </div>
+        <div class="menu-card" onclick="location.href='/my-senders'">
+            <div class="menu-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="menu-title">MY SENDERS</div>
+            <div class="menu-desc">WhatsApp Devices</div>
+        </div>
+        <div class="menu-card" onclick="location.href='/tools'">
+            <div class="menu-icon"><i class="fas fa-toolbox"></i></div>
+            <div class="menu-title">TOOLS</div>
+            <div class="menu-desc">Pinterest, TikTok, YouTube</div>
+        </div>
+        <div class="menu-card" onclick="location.href='/profile'">
+            <div class="menu-icon"><i class="fas fa-user"></i></div>
+            <div class="menu-title">PROFILE</div>
+            <div class="menu-desc">Account Settings</div>
+        </div>
+    </div>
+
+    <div class="section-title">👑 ADMIN PANEL</div>
+    <div class="menu-grid" id="adminMenu" style="display:none">
+        <div class="menu-card" onclick="location.href='/user-management'">
+            <div class="menu-icon"><i class="fas fa-users"></i></div>
+            <div class="menu-title">USER MANAGEMENT</div>
+            <div class="menu-desc">Manage Users</div>
+        </div>
+    </div>
+</main>
+
+<nav class="bottom-nav">
+    <button class="nav-item active" onclick="location.href='/dashboard'">
+        <i class="fas fa-home"></i>
+        <span class="nav-text">Home</span>
+    </button>
+    <button class="nav-item" onclick="location.href='/execution'">
+        <i class="fas fa-skull"></i>
+        <span class="nav-text">Attack</span>
+    </button>
+    <button class="nav-item" onclick="location.href='/tools'">
+        <i class="fas fa-tools"></i>
+        <span class="nav-text">Tools</span>
+    </button>
+    <button class="nav-item" onclick="location.href='/profile'">
+        <i class="fas fa-user"></i>
+        <span class="nav-text">Profile</span>
+    </button>
+</nav>
+
+<script>
+    let userRole = 'user';
+    
+    async function fetchUserData() {
+        try {
+            const res = await fetch('/api/option-data');
+            const data = await res.json();
+            document.getElementById('username').innerText = data.username || 'Guest';
+            document.getElementById('onlineUsers').innerText = data.onlineUsers || 1;
+            document.getElementById('sendersCount').innerText = data.activeSenders || 0;
+            document.getElementById('daysLeft').innerText = data.daysRemaining || 0;
+            userRole = data.role || 'user';
+            
+            if (userRole === 'owner' || userRole === 'admin') {
+                document.getElementById('adminMenu').style.display = 'grid';
+            }
+        } catch(e) {
+            console.error(e);
+        }
+    }
+    
+    function toggleSidebar() {
+        // Sidebar functionality
+    }
+    
+    fetchUserData();
+    setInterval(fetchUserData, 30000);
+</script>
+</body>
+</html>
