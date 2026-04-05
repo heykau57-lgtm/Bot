@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Waie - Anime</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#080310;--bg2:radial-gradient(circle at 50% 0%,#1a0b2e 0%,#080310 80%);--card:rgba(26,11,46,0.85);--pink:#db2777;--gray:#9ca3af;--font:'Share Tech Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);background-image:var(--bg2);font-family:var(--font);min-height:100vh;padding:20px}
+.container{max-width:800px;margin:0 auto}
+header{background:rgba(8,3,16,0.95);padding:15px 20px;border-radius:20px;margin-bottom:20px;display:flex;align-items:center;gap:15px}
+.back-btn{background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.3);color:var(--pink);padding:8px 15px;border-radius:10px;text-decoration:none;font-size:12px}
+.brand{font-size:18px;font-weight:700;color:#fff;text-shadow:0 0 10px var(--pink);flex:1;text-align:center}
+.anime-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.anime-card{background:var(--card);border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;cursor:pointer}
+.anime-card img{width:100%;aspect-ratio:2/3;object-fit:cover}
+.anime-title{padding:8px;font-size:11px;text-align:center;color:#fff}
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <a href="/dashboard" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+        <div class="brand">🎬 ANIME STREAM</div>
+    </header>
+    <div class="anime-grid" id="animeGrid">
+        <div class="anime-card" onclick="window.open('https://otakudesu.lol','_blank')"><img src="https://i.imgur.com/8QzZz2M.png" alt=""><div class="anime-title">OtakuDesu</div></div>
+        <div class="anime-card" onclick="window.open('https://samehadaku.mx','_blank')"><img src="https://i.imgur.com/5WQYx2N.png" alt=""><div class="anime-title">Samehadaku</div></div>
+        <div class="anime-card" onclick="window.open('https://anoboy.ch','_blank')"><img src="https://i.imgur.com/4XyQ3Kb.png" alt=""><div class="anime-title">Anoboy</div></div>
+    </div>
+</div>
+</body>
+</html>
