@@ -1,0 +1,12 @@
+[
+  {
+    "username": "admin",
+    "key": "waiesyaz",
+    "expired": 4102444800000,
+    "role": "owner",
+    "telegram_id": "",
+    "isLoggedIn": false,
+    "created_at": 1743696000000,
+    "created_by": "system"
+  }
+]
